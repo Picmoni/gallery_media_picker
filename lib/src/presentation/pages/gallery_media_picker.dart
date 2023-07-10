@@ -33,6 +33,7 @@ class _GalleryMediaPickerState extends State<GalleryMediaPicker> {
 
   @override
   void initState() {
+    print(widget.mediaPickerParams);
     _getPermission();
     provider.paramsModel = widget.mediaPickerParams;
     super.initState();
