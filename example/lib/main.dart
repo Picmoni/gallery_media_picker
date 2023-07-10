@@ -25,7 +25,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
@@ -41,7 +41,7 @@ class MyApp extends StatelessWidget {
 }
 
 class Example extends StatefulWidget {
-  const Example({Key key}) : super(key: key);
+  const Example({Key? key}) : super(key: key);
 
   @override
   State<Example> createState() => _ExampleState();
@@ -150,7 +150,7 @@ class _ExampleState extends State<Example> {
                       imageBackgroundColor: Colors.black,
                       selectedCheckColor: Colors.black87,
                       selectedBackgroundColor: Colors.black,
-                      gridViewBackgroundColor: Colors.grey[900],
+                      gridViewBackgroundColor: Colors.grey[900]!,
                       selectedCheckBackgroundColor: Colors.white10,
                       appBarLeadingWidget: Align(
                         alignment: Alignment.bottomRight,
