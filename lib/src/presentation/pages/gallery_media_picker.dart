@@ -9,7 +9,6 @@ import 'package:gallery_media_picker/src/presentation/widgets/gallery_grid/galle
 import 'package:gallery_media_picker/src/presentation/widgets/select_album_path/current_path_selector.dart';
 import 'package:oktoast/oktoast.dart';
 import 'package:photo_manager/photo_manager.dart';
-import 'package:provider/provider.dart';
 
 class GalleryMediaPicker extends StatefulWidget {
   /// params model
@@ -30,12 +29,10 @@ class GalleryMediaPicker extends StatefulWidget {
 
 class _GalleryMediaPickerState extends State<GalleryMediaPicker> {
   /// create object of PickerDataProvider
-  late GalleryMediaPickerController provider;
+  final GalleryMediaPickerController provider = GalleryMediaPickerController();
 
   @override
   void initState() {
-    provider =
-        Provider.of<GalleryMediaPickerController>(context, listen: false);
     _getPermission();
     provider.paramsModel = widget.mediaPickerParams;
     super.initState();
