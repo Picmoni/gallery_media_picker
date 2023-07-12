@@ -53,11 +53,6 @@ class GalleryFunctions {
     );
   }
 
-  static onPickMax(GalleryMediaPickerController provider) {
-    provider.onPickMax
-        .addListener(() => showToast("Already pick ${provider.max} items."));
-  }
-
   static getPermission(setState, GalleryMediaPickerController provider) async {
     /// request for device permission
     var result = await PhotoManager.requestPermissionExtend(

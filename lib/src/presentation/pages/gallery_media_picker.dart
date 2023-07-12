@@ -41,14 +41,14 @@ class _GalleryMediaPickerState extends State<GalleryMediaPicker> {
   /// get photo manager permission
   _getPermission() {
     GalleryFunctions.getPermission(setState, provider);
-    GalleryFunctions.onPickMax(provider);
+    // GalleryFunctions.onPickMax(provider);
   }
 
   @override
   void dispose() {
     if (mounted) {
       /// clear all controller list
-      provider.onPickMax.removeListener(GalleryFunctions.onPickMax(provider));
+      // provider.onPickMax.removeListener(GalleryFunctions.onPickMax(provider));
       provider.pickedFile.clear();
       provider.picked.clear();
       provider.pathList.clear();
