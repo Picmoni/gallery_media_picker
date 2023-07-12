@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gallery_media_picker/gallery_media_picker.dart';
 import 'package:photo_manager/photo_manager.dart';
 
-class GalleryMediaPickerController extends ChangeNotifier {
+mixin PhotoDataController on ChangeNotifier {
   /// save params model
   MediaPickerParamsModel? _paramsModel = MediaPickerParamsModel();
   MediaPickerParamsModel get paramsModel => _paramsModel!;
@@ -57,7 +57,10 @@ class GalleryMediaPickerController extends ChangeNotifier {
     pathListNotifier.value = pathList;
     notifyListeners();
   }
+}
 
+class GalleryMediaPickerController extends ChangeNotifier
+    with PhotoDataController {
   /// Notification when max is modified.
   final maxNotifier = ValueNotifier(0);
   int get max => maxNotifier.value;

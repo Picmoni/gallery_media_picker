@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:better_video_player/better_video_player.dart';
-import 'package:example/src/provider/imageProvider.dart';
+import 'package:example/src/provider/image_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gallery_media_picker/gallery_media_picker.dart';
