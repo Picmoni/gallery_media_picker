@@ -5,9 +5,8 @@ import 'package:photo_manager/photo_manager.dart';
 
 mixin PhotoDataController on ChangeNotifier {
   /// save params model
-  late MediaPickerParamsModel _paramsModel;
-
-  MediaPickerParamsModel get paramsModel => _paramsModel;
+  MediaPickerParamsModel? _paramsModel;
+  MediaPickerParamsModel get paramsModel => _paramsModel!;
   set paramsModel(MediaPickerParamsModel model) {
     _paramsModel = model;
     notifyListeners();
