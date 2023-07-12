@@ -5,7 +5,7 @@ import 'package:photo_manager/photo_manager.dart';
 
 class GalleryMediaPickerController extends ChangeNotifier {
   /// save params model
-  MediaPickerParamsModel? _paramsModel;
+  MediaPickerParamsModel? _paramsModel = MediaPickerParamsModel();
   MediaPickerParamsModel get paramsModel => _paramsModel!;
   set paramsModel(MediaPickerParamsModel model) {
     _paramsModel = model;
