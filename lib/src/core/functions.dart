@@ -82,7 +82,7 @@ class GalleryFunctions {
                 ? RequestType.video
                 : provider.paramsModel.onlyImages
                     ? RequestType.image
-                    : RequestType.image)
+                    : RequestType.common)
         .then((pathList) {
       /// don't delete setState
       Future.delayed(Duration.zero, () {
