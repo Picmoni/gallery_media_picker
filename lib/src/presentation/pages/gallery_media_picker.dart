@@ -40,7 +40,7 @@ class _GalleryMediaPickerState extends State<GalleryMediaPicker> {
 
   /// get photo manager permission
   _getPermission() {
-    GalleryFunctions.getPermission(setState, provider);
+    GalleryFunctions.getPermission(setState, provider, mounted);
     // GalleryFunctions.onPickMax(provider);
   }
 
