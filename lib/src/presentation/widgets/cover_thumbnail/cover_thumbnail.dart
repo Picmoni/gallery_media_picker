@@ -25,7 +25,7 @@ class _CoverThumbnailState extends State<CoverThumbnail> {
 
   @override
   void initState() {
-    GalleryFunctions.getPermission(setState, provider);
+    GalleryFunctions.getPermission(setState, provider, mounted);
     super.initState();
   }
 
