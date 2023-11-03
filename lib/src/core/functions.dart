@@ -53,8 +53,7 @@ class GalleryFunctions {
     );
   }
 
-  static getPermission(
-      setState, GalleryMediaPickerController provider, bool mounted) async {
+  static getPermission(setState, GalleryMediaPickerController provider) async {
     /// request for device permission
     var result = await PhotoManager.requestPermissionExtend(
         requestOption: const PermissionRequestOption(
@@ -64,11 +63,11 @@ class GalleryFunctions {
       provider.setAssetCount();
       PhotoManager.startChangeNotify();
       PhotoManager.addChangeCallback((value) {
-        _refreshPathList(setState, provider, mounted);
+        _refreshPathList(setState, provider);
       });
 
       if (provider.pathList.isEmpty) {
-        _refreshPathList(setState, provider, mounted);
+        _refreshPathList(setState, provider);
       }
     } else {
       /// if result is fail, you can call `PhotoManager.openSetting();`
@@ -77,13 +76,10 @@ class GalleryFunctions {
     }
   }
 
-  static _refreshPathList(
-      setState, GalleryMediaPickerController provider, bool mounted) {
+  static _refreshPathList(setState, GalleryMediaPickerController provider) {
     PhotoManager.getAssetPathList(type: RequestType.common).then((pathList) {
       /// don't delete setState
       Future.delayed(Duration.zero, () {
-        if (!mounted) return;
-
         setState(() {
           provider.resetPathList(pathList);
         });
