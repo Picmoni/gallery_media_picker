@@ -77,16 +77,16 @@ class GalleryFunctions {
     }
   }
 
-  static _refreshPathList(
-      setState, GalleryMediaPickerController provider, bool mounted) {
+  static _refreshPathList(StateSetter setState,
+      GalleryMediaPickerController provider, bool mounted) {
     PhotoManager.getAssetPathList(type: RequestType.common).then((pathList) {
       /// don't delete setState
       Future.delayed(Duration.zero, () {
-        if (!mounted) return;
-
-        setState(() {
-          provider.resetPathList(pathList);
-        });
+        if (mounted) {
+          setState(() {
+            provider.resetPathList(pathList);
+          });
+        }
       });
     });
   }
