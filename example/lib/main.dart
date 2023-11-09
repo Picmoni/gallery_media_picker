@@ -7,7 +7,6 @@ import 'package:flutter/services.dart';
 import 'package:gallery_media_picker/gallery_media_picker.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
-import 'package:share_plus/share_plus.dart';
 
 void main() {
   Paint.enableDithering = true;
@@ -236,7 +235,7 @@ class _ExampleState extends State<Example> {
                                     });
                                   }).toString();
                                   if (mediaPath.isNotEmpty) {
-                                    await Share.shareFiles(mediaPath);
+                                    // await Share.shareXFiles(mediaPath);
                                   }
                                   mediaPath.clear();
                                 },

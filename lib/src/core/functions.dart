@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:gallery_media_picker/src/presentation/pages/gallery_media_picker_controller.dart';
 import 'package:gallery_media_picker/src/presentation/widgets/select_album_path/dropdown.dart';
 import 'package:gallery_media_picker/src/presentation/widgets/select_album_path/overlay_drop_down.dart';
-import 'package:oktoast/oktoast.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 class GalleryFunctions {
