@@ -18,14 +18,14 @@ class DecodeImage extends ImageProvider<DecodeImage> {
     this.index = 0,
   });
 
-  ImageStreamCompleter load(DecodeImage key, decode) {
+  ImageStreamCompleter load(DecodeImage key) {
     return MultiFrameImageStreamCompleter(
-      codec: _loadAsync(key, decode),
+      codec: _loadAsync(key),
       scale: key.scale,
     );
   }
 
-  Future<ui.Codec> _loadAsync(DecodeImage key, decode) async {
+  Future<ui.Codec> _loadAsync(DecodeImage key) async {
     assert(key == this);
 
     final coverEntity =
@@ -34,7 +34,12 @@ class DecodeImage extends ImageProvider<DecodeImage> {
     final bytes = await coverEntity
         .thumbnailDataWithSize(ThumbnailSize(thumbSize, thumbSize));
 
-    return decode(bytes!);
+    if (bytes != null && bytes.isNotEmpty) {
+      final codec = await ui.instantiateImageCodec(bytes);
+      return codec;
+    } else {
+      throw Exception('Failed to load image bytes');
+    }
   }
 
   @override
