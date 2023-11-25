@@ -9,7 +9,6 @@ import 'package:photo_view/photo_view.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  Paint.enableDithering = true;
   WidgetsFlutterBinding.ensureInitialized();
   Provider.debugCheckInvalidValueType = null;
   SystemChrome.setPreferredOrientations(
