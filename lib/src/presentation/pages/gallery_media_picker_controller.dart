@@ -25,6 +25,7 @@ mixin PhotoDataController on ChangeNotifier {
 
   /// save path in list
   List<AssetPathEntity> pathList = [];
+
   final pathListNotifier = ValueNotifier<List<AssetPathEntity>>([]);
 
   /// order path by date

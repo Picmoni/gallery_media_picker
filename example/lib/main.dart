@@ -54,8 +54,7 @@ class _ExampleState extends State<Example> {
 
   @override
   void initState() {
-    betterPlayerConfiguration =
-    BetterPlayerConfiguration(
+    betterPlayerConfiguration = const BetterPlayerConfiguration(
       aspectRatio: 16 / 9,
       fit: BoxFit.contain,
       autoPlay: true,
@@ -69,7 +68,6 @@ class _ExampleState extends State<Example> {
 
     super.initState();
   }
-
 
   @override
   Widget build(BuildContext context) {
@@ -132,17 +130,22 @@ class _ExampleState extends State<Example> {
                               /// show video
                               else {
                                 if (mounted) {
-                                  _betterPlayerDataSource = BetterPlayerDataSource(
+                                  _betterPlayerDataSource =
+                                      BetterPlayerDataSource(
                                     BetterPlayerDataSourceType.file,
                                     data.path,
                                   );
 
-                                  _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
-                                  _betterPlayerController.setupDataSource(_betterPlayerDataSource);
+                                  _betterPlayerController =
+                                      BetterPlayerController(
+                                          betterPlayerConfiguration);
+                                  _betterPlayerController
+                                      .setupDataSource(_betterPlayerDataSource);
 
                                   return AspectRatio(
                                     aspectRatio: 16.0 / 9.0,
-                                    child: BetterPlayer(controller: _betterPlayerController),
+                                    child: BetterPlayer(
+                                        controller: _betterPlayerController),
                                     // child: BetterVideoPlayer(
                                     //   configuration:
                                     //       const BetterVideoPlayerConfiguration(

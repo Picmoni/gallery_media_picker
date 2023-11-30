@@ -46,7 +46,7 @@ class ThumbnailWidget extends StatelessWidget {
                     image: AssetEntityImageProvider(
                       asset,
                       isOriginal: false,
-                      thumbnailSize: const ThumbnailSize.square(120),
+                      thumbnailSize: const ThumbnailSize.square(200),
                       thumbnailFormat: ThumbnailFormat.jpeg,
                     ),
                     // image: DecodeImage(

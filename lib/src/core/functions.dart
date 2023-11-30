@@ -53,38 +53,52 @@ class GalleryFunctions {
   }
 
   static getPermission(setState, GalleryMediaPickerController provider) async {
-    /// request for device permission
-    var result = await PhotoManager.requestPermissionExtend(
-        requestOption: const PermissionRequestOption(
-            iosAccessLevel: IosAccessLevel.readWrite));
-    if (result.isAuth) {
-      /// load "recent" album
-      provider.setAssetCount();
-      PhotoManager.startChangeNotify();
-      PhotoManager.addChangeCallback((value) {
-        _refreshPathList(setState, provider);
-      });
+    // Request permissions.
+    final PermissionState ps = await PhotoManager.requestPermissionExtend();
 
-      if (provider.pathList.isEmpty) {
-        _refreshPathList(setState, provider);
-      }
-    } else {
-      /// if result is fail, you can call `PhotoManager.openSetting();`
-      /// to open android/ios application's setting to get permission
+    // Further requests can be only proceed with authorized or limited.
+    if (!ps.hasAccess) {
       PhotoManager.openSetting();
+    }
+    // Obtain assets using the path entity.
+    final List<AssetPathEntity> paths = await PhotoManager.getAssetPathList(
+      onlyAll: true,
+      filterOption: FilterOptionGroup(
+        imageOption: const FilterOption(
+          sizeConstraint: SizeConstraint(ignoreSize: true),
+        ),
+      ),
+    );
+
+    // continue if paths found.
+    if (paths.isNotEmpty) {
+      // get the first path entity.
+      final AssetPathEntity path = paths.first;
+      // get all assets contained in path entity.
+      provider.assetCountNotifier.value = await path.assetCountAsync;
+
+      final List<AssetEntity> assets = await path.getAssetListPaged(
+        page: 0,
+        size: 50,
+      );
+
+      setState(() {
+        provider.resetPathList(paths);
+        provider.picked = assets;
+      });
     }
   }
 
-  static _refreshPathList(setState, GalleryMediaPickerController provider) {
-    PhotoManager.getAssetPathList(type: RequestType.common).then((pathList) {
-      /// don't delete setState
-      Future.delayed(Duration.zero, () {
-        setState(() {
-          provider.resetPathList(pathList);
-        });
-      });
-    });
-  }
+  // static _refreshPathList(setState, GalleryMediaPickerController provider) {
+  //   PhotoManager.getAssetPathList(type: RequestType.common).then((pathList) {
+  //     /// don't delete setState
+  //     Future.delayed(Duration.zero, () {
+  //       setState(() {
+  //         provider.resetPathList(pathList);
+  //       });
+  //     });
+  //   });
+  // }
 
   /// get asset path
   static Future getFile(AssetEntity asset) async {
