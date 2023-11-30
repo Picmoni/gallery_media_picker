@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:better_video_player/better_video_player.dart';
+import 'package:better_player_plus/better_player_plus.dart';
 import 'package:example/src/provider/image_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -47,6 +47,30 @@ class Example extends StatefulWidget {
 
 class _ExampleState extends State<Example> {
   bool _singlePick = false;
+
+  late BetterPlayerController _betterPlayerController;
+  late BetterPlayerDataSource _betterPlayerDataSource;
+  late BetterPlayerConfiguration betterPlayerConfiguration;
+
+  @override
+  void initState() {
+    betterPlayerConfiguration =
+    BetterPlayerConfiguration(
+      aspectRatio: 16 / 9,
+      fit: BoxFit.contain,
+      autoPlay: true,
+      looping: true,
+      allowedScreenSleep: false,
+      deviceOrientationsAfterFullScreen: [
+        DeviceOrientation.portraitDown,
+        DeviceOrientation.portraitUp
+      ],
+    );
+
+    super.initState();
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -108,22 +132,32 @@ class _ExampleState extends State<Example> {
                               /// show video
                               else {
                                 if (mounted) {
+                                  _betterPlayerDataSource = BetterPlayerDataSource(
+                                    BetterPlayerDataSourceType.file,
+                                    data.path,
+                                  );
+
+                                  _betterPlayerController = BetterPlayerController(betterPlayerConfiguration);
+                                  _betterPlayerController.setupDataSource(_betterPlayerDataSource);
+
                                   return AspectRatio(
                                     aspectRatio: 16.0 / 9.0,
-                                    child: BetterVideoPlayer(
-                                      configuration:
-                                          const BetterVideoPlayerConfiguration(
-                                        looping: true,
-                                        autoPlay: true,
-                                        allowedScreenSleep: false,
-                                        autoPlayWhenResume: true,
-                                      ),
-                                      controller: BetterVideoPlayerController(),
-                                      dataSource: BetterVideoPlayerDataSource(
-                                        BetterVideoPlayerDataSourceType.file,
-                                        data.path,
-                                      ),
-                                    ),
+                                    child: BetterPlayer(controller: _betterPlayerController),
+                                    // child: BetterVideoPlayer(
+                                    //   configuration:
+                                    //       const BetterVideoPlayerConfiguration(
+                                    //     looping: true,
+                                    //     autoPlay: true,
+                                    //     allowedScreenSleep: false,
+                                    //     autoPlayWhenResume: true,
+                                    //   ),
+                                    //   controller: BetterVideoPlayerController(),
+                                    //   dataSource: BetterVideoPlayerDataSource(
+                                    //     BetterVideoPlayerDataSourceType.file,
+                                    //     data.path,
+                                    //   ),
+                                    // ),
+                                    //
                                   );
                                 } else {
                                   return Container();
