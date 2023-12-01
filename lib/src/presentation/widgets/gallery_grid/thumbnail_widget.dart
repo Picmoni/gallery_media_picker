@@ -43,9 +43,8 @@ class ThumbnailWidget extends StatelessWidget {
                   width: double.infinity,
                   height: double.infinity,
                   child: AssetEntityImage(
-                    provider.picked[0],
+                    asset,
                     isOriginal: false,
-                    thumbnailSize: const ThumbnailSize(45, 80),
                     thumbnailFormat: ThumbnailFormat.jpeg,
                     filterQuality: FilterQuality.high,
                     gaplessPlayback: true,
