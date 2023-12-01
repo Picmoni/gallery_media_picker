@@ -48,7 +48,7 @@ class _CoverThumbnailState extends State<CoverThumbnail> {
             image: AssetEntityImageProvider(
               provider.picked[0],
               isOriginal: false,
-              thumbnailSize: const ThumbnailSize.square(200),
+              thumbnailSize: const ThumbnailSize.square(120),
               thumbnailFormat: ThumbnailFormat.jpeg,
             ),
             // image: DecodeImage(provider.pathList[0],
