@@ -44,20 +44,29 @@ class _CoverThumbnailState extends State<CoverThumbnail> {
   @override
   Widget build(BuildContext context) {
     return provider.pathList.isNotEmpty
-        ? Image(
-            image: AssetEntityImageProvider(
-              provider.picked[0],
-              isOriginal: false,
-              thumbnailSize: const ThumbnailSize.square(120),
-              thumbnailFormat: ThumbnailFormat.jpeg,
-            ),
-            // image: DecodeImage(provider.pathList[0],
-            //     thumbSize: widget.thumbnailQuality,
-            //     index: 0,
-            //     scale: widget.thumbnailScale),
-            fit: widget.thumbnailFit,
+        ? AssetEntityImage(
+            provider.picked[0],
+            isOriginal: false,
+            thumbnailSize: const ThumbnailSize(45, 80),
+            thumbnailFormat: ThumbnailFormat.jpeg,
             filterQuality: FilterQuality.high,
+            fit: BoxFit.cover,
           )
+        // Image(
+        //     image: AssetEntityImageProvider(
+        //       provider.picked[0],
+        //       isOriginal: false,
+        //       thumbnailSize: const ThumbnailSize.square(120),
+        //       thumbnailFormat: ThumbnailFormat.jpeg,
+        //     ),
+
+        //     // image: DecodeImage(provider.pathList[0],
+        //     //     thumbSize: widget.thumbnailQuality,
+        //     //     index: 0,
+        //     //     scale: widget.thumbnailScale),
+        //     fit: widget.thumbnailFit,
+        //     filterQuality: FilterQuality.high,
+        //   )
         : Container();
   }
 }

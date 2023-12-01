@@ -42,22 +42,31 @@ class ThumbnailWidget extends StatelessWidget {
                 return SizedBox(
                   width: double.infinity,
                   height: double.infinity,
-                  child: Image(
-                    image: AssetEntityImageProvider(
-                      asset,
-                      isOriginal: false,
-                      thumbnailSize: const ThumbnailSize.square(120),
-                      thumbnailFormat: ThumbnailFormat.jpeg,
-                    ),
-                    // image: DecodeImage(
-                    //     provider.pathList[
-                    //         provider.pathList.indexOf(provider.currentAlbum!)],
-                    //     thumbSize: provider.paramsModel.thumbnailQuality,
-                    //     index: index),
-                    gaplessPlayback: true,
-                    fit: provider.paramsModel.thumbnailBoxFix,
+                  child: AssetEntityImage(
+                    provider.picked[0],
+                    isOriginal: false,
+                    thumbnailSize: const ThumbnailSize(45, 80),
+                    thumbnailFormat: ThumbnailFormat.jpeg,
                     filterQuality: FilterQuality.high,
+                    gaplessPlayback: true,
+                    fit: BoxFit.cover,
                   ),
+                  //  Image(
+                  //   image: AssetEntityImageProvider(
+                  //     asset,
+                  //     isOriginal: false,
+                  //     thumbnailSize: const ThumbnailSize.square(120),
+                  //     thumbnailFormat: ThumbnailFormat.jpeg,
+                  //   ),
+                  //   // image: DecodeImage(
+                  //   //     provider.pathList[
+                  //   //         provider.pathList.indexOf(provider.currentAlbum!)],
+                  //   //     thumbSize: provider.paramsModel.thumbnailQuality,
+                  //   //     index: index),
+                  //   gaplessPlayback: true,
+                  //   fit: provider.paramsModel.thumbnailBoxFix,
+                  //   filterQuality: FilterQuality.high,
+                  // ),
                 );
               } else {
                 return Container(
