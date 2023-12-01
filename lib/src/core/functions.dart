@@ -87,8 +87,8 @@ class GalleryFunctions {
       )
           .then((value) {
         setState(() {
+          provider.picked = value;
           provider.resetPathList(paths);
-          // provider.picked = value;
         });
       });
     }
