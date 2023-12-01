@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:gallery_media_picker/src/presentation/pages/gallery_media_picker_controller.dart';
 import 'package:gallery_media_picker/src/presentation/widgets/select_album_path/dropdown.dart';
 import 'package:gallery_media_picker/src/presentation/widgets/select_album_path/overlay_drop_down.dart';
+import 'package:oktoast/oktoast.dart';
 import 'package:photo_manager/photo_manager.dart';
 
 class GalleryFunctions {
@@ -52,6 +53,11 @@ class GalleryFunctions {
     );
   }
 
+  static onPickMax(GalleryMediaPickerController provider) {
+    provider.onPickMax
+        .addListener(() => showToast("Already pick ${provider.max} items."));
+  }
+
   static getPermission(setState, GalleryMediaPickerController provider) async {
     // Request permissions.
     final PermissionState ps = await PhotoManager.requestPermissionExtend();
@@ -62,12 +68,7 @@ class GalleryFunctions {
     }
     // Obtain assets using the path entity.
     final List<AssetPathEntity> paths = await PhotoManager.getAssetPathList(
-      onlyAll: true,
-      filterOption: FilterOptionGroup(
-        imageOption: const FilterOption(
-          sizeConstraint: SizeConstraint(ignoreSize: true),
-        ),
-      ),
+      type: RequestType.common,
     );
 
     // continue if paths found.
@@ -75,16 +76,20 @@ class GalleryFunctions {
       // get the first path entity.
       final AssetPathEntity path = paths.first;
       // get all assets contained in path entity.
-      provider.assetCountNotifier.value = await path.assetCountAsync;
+      // provider.assetCountNotifier.value = await path.assetCountAsync;
+      provider.setAssetCount();
+      PhotoManager.startChangeNotify();
 
-      final List<AssetEntity> assets = await path.getAssetListPaged(
+      await path
+          .getAssetListPaged(
         page: 0,
         size: 50,
-      );
-
-      setState(() {
-        provider.resetPathList(paths);
-        provider.picked = assets;
+      )
+          .then((value) {
+        setState(() {
+          provider.resetPathList(paths);
+          // provider.picked = value;
+        });
       });
     }
   }
