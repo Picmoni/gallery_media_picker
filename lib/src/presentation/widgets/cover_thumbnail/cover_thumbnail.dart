@@ -47,9 +47,8 @@ class _CoverThumbnailState extends State<CoverThumbnail> {
         ? AssetEntityImage(
             provider.picked[0],
             isOriginal: false,
-            thumbnailSize: const ThumbnailSize(45, 80),
             thumbnailFormat: ThumbnailFormat.jpeg,
-            filterQuality: FilterQuality.high,
+            filterQuality: FilterQuality.none,
             fit: BoxFit.cover,
           )
         // Image(

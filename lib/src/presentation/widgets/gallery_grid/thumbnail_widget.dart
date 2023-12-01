@@ -46,7 +46,7 @@ class ThumbnailWidget extends StatelessWidget {
                     asset,
                     isOriginal: false,
                     thumbnailFormat: ThumbnailFormat.jpeg,
-                    filterQuality: FilterQuality.high,
+                    filterQuality: FilterQuality.none,
                     gaplessPlayback: true,
                     fit: BoxFit.cover,
                   ),
